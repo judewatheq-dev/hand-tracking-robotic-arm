@@ -52,3 +52,16 @@ mpDraw = mp.solutions.drawing_utils
 tipIds = [4, 8, 12, 16, 20] #for tips of fingers
 dipIds = [3, 7, 11, 15, 19] #for joint below tip
 pipIds = [2, 6, 10, 14, 18] #joint below it 
+
+#servo functions 
+def moveServoAngle(angle, pin):
+    if angle > 160:
+        pin.write(0) #if its staight then it will make it fully straight
+    elif angle <= 160: #if bent even slighlty will bentd it fully   (there are no in betweens!!)
+        pin.write(180)
+
+def moveServoBool(isUp, pin):
+    if isUp:
+        pin.write(180)
+    else:
+        pin.write(0)
