@@ -44,8 +44,8 @@ rotationPin.write(0)
 cam = cv.VideoCapture(0)
 
 #intializing hands
-hands = mp.solutions.hands
-hands = hands.Hands(max_num_hands=1, min_detection_confidence=0.7)
+mpHands = mp.solutions.hands
+hands = mpHands.Hands(max_num_hands=1, min_detection_confidence=0.7)
 mpDraw = mp.solutions.drawing_utils
 
 #Id #s for each joint
@@ -65,3 +65,23 @@ def moveServoBool(isUp, pin):
         pin.write(180)
     else:
         pin.write(0)
+
+class HandDetector:
+    def __init__(self, mode=False, maxHands=2, detectionCon=0.5, trackCon=0.5):       
+        self.mode = mode
+        self.maxHands = maxHands
+        self.detectionCon = detectionCon 
+        self.trackCon = trackCon 
+
+        self.mpHands = mp.solutions.hands
+        self.hands = self.mpHands.Hands(static_image_mode=self.mode, max_num_hands=self.maxHands,min_detection_confidence=self.detectionCon,
+            min_tracking_confidence=self.trackCon)
+        self.mpDraw = mp.solutions.drawing_utils
+
+        self.tipIds = [4, 8, 12, 16, 20] #for tips of fingers
+        self.dipIds = [3, 7, 11, 15, 19] #for joint below tip
+        self.pipIds = [2, 6, 10, 14, 18] #joint below it 
+        self.jointlist = [[4,3,2],[8,7,6], [12,11,10], [16,15,14], [20,19,18]]
+        self.landmarks = []
+
+ 
