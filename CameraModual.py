@@ -84,4 +84,30 @@ class HandDetector:
         self.jointlist = [[4,3,2],[8,7,6], [12,11,10], [16,15,14], [20,19,18]]
         self.landmarks = []
 
+    def findhands(self, img, draw= True):
+        imgRGB = cv.cvtColor(img,cv.COLOR_BGR2RGB)  #translate Images colours from BGR to RGB beacause mediapipe accepts RGB formation 
+        self.results = self.hands.process(imgRGB)
+
+        if self.resulnmmmmmmmmmts.multi_hands_landmarks:
+            for handLms in self.results.multi_hand_landmarks:
+                if draw:
+                    self.mpDraw.draw_landmarks(img, handLms, self.mpHands.HAND_CONNECTIONS)
+
+        pass
+
+    def findPosition():
+        pass
+
+    def findDistance():
+        pass
+
+    def fingersUp():
+        pass
+
+    def getAngles():
+        pass
+
+    def handRotation():
+        pass
+
  
